@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>rheiiv.x</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            background:#000;
+            color:#fff;
+            font-family:'Inter',sans-serif;
+            overflow:hidden;
+        }
+
+        .bg-image{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background-image:url("Landing, Home, About/Main Photo.png");
+            background-size:cover;
+            background-position: 70% center;
+            background-repeat:no-repeat;
+            z-index:-3;
+            pointer-events:none;
+        }
+
+        .overlay{
+            position:fixed;
+            inset:0;
+
+            background:rgba(0,0,0,.55);
+
+            z-index:-2;
+        }
+
+        .overlay::after{
+            content:"";
+
+            position:absolute;
+            inset:0;
+
+            background:
+                    radial-gradient(
+                            circle at center,
+                            rgba(255,255,255,.08),
+                            transparent 60%
+                    );
+
+            pointer-events:none;
+        }
+
+        header{
+            width:min(92%,1400px);
+
+            margin:auto;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            padding:2rem 0;
+
+            position:relative;
+            z-index:100;
+        }
+
+        .logo{
+            text-decoration:none;
+            color:white;
+
+            letter-spacing:.35rem;
+            text-transform:lowercase;
+
+            font-size:clamp(.9rem,1vw,1rem);
+        }
+
+        .menu-wrapper{
+            position:relative;
+        }
+
+        .menu-btn{
+            background:none;
+            border:none;
+
+            color:white;
+
+            cursor:pointer;
+
+            font-size:.85rem;
+
+            letter-spacing:.2rem;
+
+            opacity:.8;
+
+            font-family:'Inter',sans-serif;
+        }
+
+        .menu-btn:hover{
+            opacity:1;
+        }
+
+        .dropdown{
+            position:absolute;
+
+            top:180%;
+            right:0;
+
+            display:flex;
+            flex-direction:column;
+            gap:.4rem;
+
+            opacity:0;
+            visibility:hidden;
+
+            transform:translateY(-10px);
+
+            transition:.3s ease;
+        }
+
+        .dropdown.show{
+            opacity:1;
+            visibility:visible;
+            transform:translateY(0);
+        }
+
+        .dropdown a{
+            text-decoration:none;
+            color:white;
+
+            padding:.75rem 1rem;
+
+            min-width:140px;
+
+            text-align:left;
+
+            font-size:.8rem;
+
+            letter-spacing:.15rem;
+
+            border:1px solid rgba(255,255,255,.15);
+
+            background:rgba(0,0,0,.4);
+
+            backdrop-filter:blur(12px);
+
+            transition:.3s ease;
+        }
+
+        .dropdown a:hover{
+            background:white;
+            color:black;
+        }
+
+        .hero{
+            width:min(92%,1400px);
+
+            margin:auto;
+
+            min-height:75vh;
+
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+        }
+
+        .subtitle{
+            font-size:.8rem;
+
+            letter-spacing:.35rem;
+
+            text-transform:uppercase;
+
+            opacity:.7;
+
+            margin-bottom:1rem;
+        }
+
+        .hero h1{
+            font-family:'Cormorant Garamond', serif;
+
+            font-weight:300;
+
+            line-height:.9;
+
+            font-size:clamp(4rem,12vw,11rem);
+
+            text-transform:lowercase;
+        }
+
+        .hero p{
+            width:min(500px,100%);
+
+            margin-top:1.5rem;
+
+            line-height:1.8;
+
+            opacity:.8;
+
+            font-size:clamp(.9rem,1vw,1rem);
+        }
+
+        .enter-btn{
+            margin-top:2rem;
+
+            width:fit-content;
+
+            text-decoration:none;
+            color:white;
+
+            border:1px solid rgba(255,255,255,.25);
+
+            backdrop-filter:blur(12px);
+
+            padding:1rem 2rem;
+
+            letter-spacing:.2rem;
+
+            transition:.3s ease;
+        }
+
+        .enter-btn:hover{
+            background:white;
+            color:black;
+        }
+
+
+        .left-label{
+            position:fixed;
+
+            left:2rem;
+            bottom:2rem;
+
+            font-size:.75rem;
+
+            opacity:.55;
+
+            letter-spacing:.15rem;
+        }
+
+        .right-label{
+            position:fixed;
+
+            right:2rem;
+            bottom:2rem;
+
+            font-size:.75rem;
+
+            opacity:.55;
+
+            letter-spacing:.15rem;
+        }
+
+        @media(max-width:768px){
+
+            body{
+                overflow:auto;
+            }
+
+            .hero{
+                text-align:center;
+                align-items:center;
+            }
+
+            .hero p{
+                width:100%;
+            }
+
+            .enter-btn{
+                width:100%;
+                max-width:300px;
+                text-align:center;
+            }
+
+            .left-label,
+            .right-label{
+                position:static;
+                text-align:center;
+                margin-top:1rem;
+            }
+
+            .hero h1{
+                font-size:5rem;
+            }
+
+        }
+
+
+        .transition-overlay{
+            position:fixed;
+            inset:0;
+
+            background:#000;
+
+            z-index:99999;
+
+            pointer-events:none;
+
+            opacity:0;
+        }
+
+        .transition-overlay.active{
+
+            opacity:1;
+
+            backdrop-filter:blur(20px);
+
+            animation:glitchOut .7s ease forwards;
+        }
+
+        @keyframes glitchIn{
+
+            0%{
+                opacity:1;
+                filter:blur(20px);
+                transform:scale(1.03);
+            }
+
+            20%{
+                opacity:.9;
+                filter:blur(12px);
+                transform:translateX(5px);
+            }
+
+            40%{
+                opacity:.7;
+                filter:blur(8px);
+                transform:translateX(-5px);
+            }
+
+            60%{
+                opacity:.4;
+                filter:blur(4px);
+                transform:translateX(2px);
+            }
+
+            100%{
+                opacity:0;
+                filter:blur(0);
+                transform:scale(1);
+            }
+
+        }
+
+        .transition-overlay.enter{
+            opacity:1;
+            animation:glitchIn .8s ease forwards;
+        }
+
+        @keyframes glitchOut{
+
+            0%{
+                opacity:0;
+                filter:blur(0px);
+                transform:scale(1);
+            }
+
+            20%{
+                opacity:.4;
+                filter:blur(4px);
+                transform:translateX(-6px);
+            }
+
+            40%{
+                opacity:.6;
+                filter:blur(8px);
+                transform:translateX(6px);
+            }
+
+            60%{
+                opacity:.8;
+                filter:blur(12px);
+                transform:translateX(-3px);
+            }
+
+            100%{
+                opacity:1;
+                filter:blur(20px);
+                transform:scale(1.03);
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="bg-image"></div>
+
+<div class="overlay"></div>
+
+<header>
+
+    <a href="#" class="logo">
+        RHEIIV.X
+    </a>
+
+    <div class="menu-wrapper">
+
+        <button class="menu-btn" id="menuBtn">
+            menu
+        </button>
+
+        <div class="dropdown" id="dropdownMenu">
+
+            <a href="home.html">home</a>
+            <a href="works.html">works</a>
+            <a href="about.html">about</a>
+            <a href="contact.html">contact</a>
+
+        </div>
+
+    </div>
+
+</header>
+
+<main class="hero">
+
+    <span class="subtitle">
+        graphic artist • video editor • 2D artist
+    </span>
+
+    <h1>
+        rheiiv.x
+    </h1>
+
+    <p>
+        softly built, sharply felt—visuals that linger beyond the frame
+    </p>
+
+    <a href="home.html" class="enter-btn">
+        ENTER PORTFOLIO
+    </a>
+
+</main>
+
+<div class="left-label">
+    multimedia artist
+</div>
+
+<div class="right-label">
+    based in manila, ph
+</div>
+
+<div
+        class="transition-overlay enter"
+        id="transitionOverlay">
+</div>
+
+<script>
+
+    const menuBtn = document.getElementById('menuBtn');
+    const dropdown = document.getElementById('dropdownMenu');
+
+    menuBtn.addEventListener('click', () => {
+        dropdown.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (e) => {
+
+        if(
+            !menuBtn.contains(e.target) &&
+            !dropdown.contains(e.target)
+        ){
+            dropdown.classList.remove('show');
+        }
+
+    });
+
+    const overlayTransition =
+        document.getElementById('transitionOverlay');
+
+    window.addEventListener('load',()=>{
+
+        overlayTransition.classList.add('enter');
+
+        setTimeout(()=>{
+
+            overlayTransition.classList.remove('enter');
+
+        },800);
+
+    });
+
+    document.querySelectorAll('a').forEach(link => {
+
+        link.addEventListener('click', function(e){
+
+            const href = this.getAttribute('href');
+
+            if(
+                href &&
+                !href.startsWith('#')
+            ){
+
+                e.preventDefault();
+
+                overlayTransition.classList.add('active');
+
+                setTimeout(() => {
+
+                    window.location.href = href;
+
+                }, 650);
+
+            }
+
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

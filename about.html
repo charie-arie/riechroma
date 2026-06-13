@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rheiiv.x | about</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            background:#000000;
+            color:#f4f4f4;
+            font-family:'Inter',sans-serif;
+            overflow-x:hidden;
+            position:relative;
+        }
+
+        a{
+            text-decoration:none;
+            color:inherit;
+        }
+
+        .page{
+            width:min(94%,1440px);
+            margin:0 auto;
+            position:relative;
+            z-index:1;
+        }
+
+        header{
+            width:100%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:1.25rem 0;
+            position:sticky;
+            top:0;
+            z-index:60;
+            backdrop-filter:blur(14px);
+            background:linear-gradient(to bottom, rgba(0,0,0,.96), rgba(0,0,0,.62));
+            border-bottom:1px solid rgba(255,255,255,.08);
+        }
+
+        .logo{
+            font-size:.82rem;
+            letter-spacing:.34rem;
+            text-transform:uppercase;
+            font-weight:700;
+        }
+
+        .nav-links{
+            display:flex;
+            align-items:center;
+            gap:.8rem;
+            flex-wrap:wrap;
+        }
+
+        .nav-links a{
+            font-size:.72rem;
+            letter-spacing:.18rem;
+            text-transform:uppercase;
+            padding:.65rem .9rem;
+            border:1px solid rgba(255,255,255,.14);
+            border-radius:999px;
+            background:rgba(255,255,255,.04);
+        }
+
+        .nav-links a:hover{
+            background:#fff;
+            color:#000;
+            border-color:#fff;
+        }
+
+        .about-layout{
+            width:100%;
+            padding-top:3.8rem;
+            padding-bottom:6rem;
+        }
+
+        .intro-grid{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:4rem;
+            min-height:calc(100vh - 120px);
+            margin-bottom:4.5rem;
+        }
+
+        .intro-text-col{
+            flex:1.15;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            gap:1.15rem;
+            position:relative;
+            padding-top:0;
+        }
+
+        .photo-col{
+            flex:.95;
+            position:relative;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            margin-top:0;
+            padding-top:0;
+        }
+
+        .section-tag-wrapper{
+            display:flex;
+            align-items:center;
+            gap:1rem;
+        }
+
+        .section-tag{
+            font-size:.7rem;
+            letter-spacing:.28rem;
+            text-transform:uppercase;
+            font-weight:700;
+            opacity:.45;
+            white-space:nowrap;
+        }
+
+        .section-line{
+            flex-grow:1;
+            height:1px;
+            background:rgba(255,255,255,.16);
+        }
+
+        .about-title{
+            font-size:clamp(4.4rem, 10vw, 8.8rem);
+            font-weight:700;
+            line-height:.92;
+            letter-spacing:-.08rem;
+            max-width:10ch;
+            margin-top:0;
+        }
+
+        .about-title em{
+            font-family:'Cormorant Garamond', serif;
+            font-style:italic;
+            font-weight:500;
+            color:#fff;
+        }
+
+        .title-star-accent{
+            font-size:1.5rem;
+            opacity:.75;
+            animation:pulseStar 4s infinite ease-in-out;
+            width:fit-content;
+        }
+
+        .bio-paragraph{
+            font-size:1.12rem;
+            line-height:1.9;
+            opacity:.88;
+            max-width:680px;
+            margin-top:0;
+        }
+
+        .bio-paragraph strong{
+            font-weight:700;
+            color:#fff;
+        }
+
+        .scrap-note{
+            display:inline-block;
+            width:fit-content;
+            padding:.6rem 1rem;
+            border:1px dashed rgba(255,255,255,.3);
+            background:rgba(255,255,255,.05);
+            transform:rotate(-2deg);
+            font-size:.72rem;
+            letter-spacing:.12rem;
+            text-transform:uppercase;
+            opacity:.9;
+        }
+
+        .extra-copy{
+            display:flex;
+            flex-direction:column;
+            gap:1rem;
+            max-width:680px;
+            border-left:1px solid rgba(255,255,255,.14);
+            padding-left:1.2rem;
+            margin-top:.1rem;
+        }
+
+        .extra-copy p{
+            font-size:.98rem;
+            line-height:1.9;
+            opacity:.72;
+        }
+
+        .scrap-stamps{
+            display:flex;
+            flex-wrap:wrap;
+            gap:.7rem;
+            margin-top:.3rem;
+        }
+
+        .stamp{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            padding:.55rem .85rem;
+            border:1px solid rgba(255,255,255,.22);
+            background:rgba(255,255,255,.04);
+            font-size:.7rem;
+            letter-spacing:.18rem;
+            text-transform:uppercase;
+            transform:rotate(-4deg);
+        }
+
+        .stamp:nth-child(2){
+            transform:rotate(3deg);
+        }
+
+        .stamp:nth-child(3){
+            transform:rotate(-1deg);
+        }
+
+        .photo-col{
+            position:relative;
+            display:flex;
+            justify-content:center;
+            align-items:flex-start;
+            padding:0;
+            margin-top:-1.4rem;
+        }
+
+        .window-shadow-backdrop{
+            position:absolute;
+            width:100%;
+            max-width:430px;
+            aspect-ratio:4/5;
+            border:1px dashed rgba(255,255,255,.18);
+            border-radius:4px;
+            transform:translate(-18px, -18px);
+            pointer-events:none;
+            z-index:1;
+        }
+
+        .profile-window{
+            width:100%;
+            max-width:430px;
+            aspect-ratio:4/5;
+            background:#070707;
+            border:1.5px solid rgba(255,255,255,.88);
+            border-radius:4px;
+            padding:.6rem;
+            box-shadow:14px 14px 0 rgba(255,255,255,.04);
+            position:relative;
+            z-index:2;
+        }
+
+        .inner-photo{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            object-position:center top;
+            border:1px solid rgba(255,255,255,.8);
+            background:#111;
+            display:block;
+        }
+
+        .info-sticker{
+            position:absolute;
+            bottom:-12px;
+            right:18px;
+            background:#fff;
+            color:#000;
+            padding:.6rem 1rem;
+            font-size:.68rem;
+            text-transform:uppercase;
+            letter-spacing:.15rem;
+            font-weight:700;
+            border-radius:2px;
+            border:1px solid #fff;
+        }
+
+        .corner-metric{
+            position:absolute;
+            top:-10px;
+            left:20px;
+            background:#000;
+            border:1px solid #fff;
+            color:#fff;
+            padding:.2rem .5rem;
+            font-size:.6rem;
+            font-weight:700;
+            letter-spacing:.05rem;
+        }
+
+        .paper-tag{
+            position:absolute;
+            left:-18px;
+            bottom:58px;
+            background:#fff;
+            color:#000;
+            font-size:.68rem;
+            letter-spacing:.16rem;
+            text-transform:uppercase;
+            padding:.55rem .8rem;
+            transform:rotate(-8deg);
+            border:1px solid #fff;
+            z-index:3;
+        }
+
+        .details-grid{
+            display:grid;
+            grid-template-columns:1.1fr .95fr;
+            gap:5rem;
+            border-top:1.5px solid rgba(255,255,255,.85);
+            padding-top:4.6rem;
+            position:relative;
+        }
+
+        .grid-center-star{
+            position:absolute;
+            top:-9px;
+            left:46%;
+            background:#000;
+            padding:0 .5rem;
+            font-size:.9rem;
+            font-weight:600;
+        }
+
+        .details-column{
+            display:flex;
+            flex-direction:column;
+            gap:3.5rem;
+        }
+
+        .column-header-block{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:1.8rem;
+            border-bottom:1px solid rgba(255,255,255,.14);
+            padding-bottom:.9rem;
+        }
+
+        .details-column h3{
+            font-size:1.1rem;
+            letter-spacing:.32rem;
+            text-transform:uppercase;
+            font-weight:800;
+            display:flex;
+            align-items:center;
+            gap:.7rem;
+        }
+
+        .details-column h3::before{
+            content:"★";
+            font-size:.9rem;
+        }
+
+        .header-num{
+            font-size:.9rem;
+            opacity:.5;
+            font-weight:700;
+        }
+
+        .timeline-list{
+            display:flex;
+            flex-direction:column;
+            gap:2.4rem;
+        }
+
+        .timeline-item{
+            display:grid;
+            grid-template-columns:170px 1fr;
+            gap:1.5rem;
+            align-items:start;
+            padding:1.15rem 0;
+            border-bottom:1px solid rgba(255,255,255,.08);
+        }
+
+        .timeline-item:last-child{
+            border-bottom:none;
+        }
+
+        .time-meta{
+            font-size:.9rem;
+            font-weight:700;
+            opacity:.5;
+            letter-spacing:.05rem;
+            padding-top:.2rem;
+        }
+
+        .item-data-block{
+            display:flex;
+            flex-direction:column;
+            gap:.25rem;
+        }
+
+        .item-title{
+            font-size:1.75rem;
+            font-weight:800;
+            color:#fff;
+            line-height:1.05;
+            letter-spacing:-.03rem;
+        }
+
+        .item-subtitle{
+            font-size:1.08rem;
+            opacity:.78;
+            font-family:'Cormorant Garamond', serif;
+            font-style:italic;
+            font-weight:500;
+        }
+
+        .item-desc-tags{
+            margin-top:.7rem;
+            display:flex;
+            flex-direction:column;
+            gap:.35rem;
+            font-size:1rem;
+            opacity:.68;
+            line-height:1.5;
+        }
+
+        .sub-data-blocks{
+            display:flex;
+            flex-direction:column;
+            gap:4.2rem;
+        }
+
+        .data-block-group{
+            display:flex;
+            flex-direction:column;
+            padding:1.1rem 0 1.3rem;
+            border-bottom:1px dashed rgba(255,255,255,.12);
+        }
+
+        .data-block-group:last-child{
+            border-bottom:none;
+        }
+
+        .tag-cloud{
+            display:flex;
+            flex-wrap:wrap;
+            gap:.75rem;
+        }
+
+        .tag-cloud span{
+            font-size:1rem;
+            background:rgba(255,255,255,.06);
+            border:1px solid rgba(255,255,255,.22);
+            padding:.72rem 1.1rem;
+            border-radius:2px;
+            letter-spacing:.01rem;
+            font-weight:600;
+        }
+
+        .tag-cloud span:hover{
+            background:#fff;
+            color:#000;
+            transform:translateY(-2px);
+        }
+
+        .footer-tags{
+            display:flex;
+            justify-content:space-between;
+            gap:2rem;
+            padding:2.5rem 0;
+            border-top:1px solid rgba(255,255,255,.85);
+            font-size:.74rem;
+            letter-spacing:.16rem;
+            text-transform:uppercase;
+            opacity:.78;
+            width:100%;
+            flex-wrap:wrap;
+            margin-top:8rem;
+        }
+
+        .footer-right-group{
+            display:flex;
+            gap:2.5rem;
+            flex-wrap:wrap;
+        }
+
+        @keyframes pulseStar{
+            0%,100%{transform:scale(1) rotate(0deg);opacity:.35}
+            50%{transform:scale(1.15) rotate(15deg);opacity:.8}
+        }
+
+        @media (max-width: 960px){
+            .intro-grid, .details-grid{
+                grid-template-columns:1fr;
+                gap:3rem;
+            }
+
+            .photo-col{
+                order:-1;
+                margin-bottom:.5rem;
+                margin-top:0;
+            }
+
+            .grid-center-star{
+                display:none;
+            }
+
+            .timeline-item{
+                grid-template-columns:1fr;
+                gap:.35rem;
+            }
+
+            .about-title{
+                max-width:none;
+            }
+
+            .profile-window,
+            .window-shadow-backdrop{
+                max-width:360px;
+            }
+        }
+
+        @media (max-width: 640px){
+            header{
+                padding:1rem 0;
+                align-items:flex-start;
+                gap:1rem;
+                flex-direction:column;
+            }
+
+            .nav-links{
+                width:100%;
+                justify-content:flex-start;
+            }
+
+            .footer-tags{
+                flex-direction:column;
+                gap:1.4rem;
+            }
+
+            .footer-right-group{
+                width:100%;
+                justify-content:space-between;
+                gap:0;
+            }
+
+            .item-title{
+                font-size:1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <header>
+        <a href="index.html" class="logo">rheiiv.x</a>
+        <nav class="nav-links">
+            <a href="home.html">home</a>
+            <a href="about.html" class="active">about</a>
+            <a href="works.html">works</a>
+            <a href="contact.html">contact</a>
+        </nav>
+    </header>
+
+    <main class="about-layout" id="about">
+        <div class="intro-grid">
+            <span class="title-star-accent">✦</span>
+
+            <section class="intro-text-col">
+                <div class="section-tag-wrapper">
+                    <span class="section-tag">About Me // Profile</span>
+                    <div class="section-line"></div>
+                </div>
+
+                <h1 class="about-title">I am <em>Charie Diantha</em></h1>
+
+                <span class="scrap-note">torn note // multimedia specialist</span>
+
+                <p class="bio-paragraph">
+                    Working across graphic design, video editing, and visual storytelling, I continue to explore new techniques, perspectives, and creative approaches with every project. While each experience adds to my knowledge, I believe there is always more to learn, refine, and discover, making growth an ongoing part of my creative journey.
+                </p>
+
+                <div class="extra-copy">
+                    <p>
+                        We leave traces of ourselves in everything we create, turning passing thoughts into lasting forms and transforming imagination into something the world can remember.
+                    </p>
+                </div>
+
+                <div class="scrap-stamps">
+                    <span class="stamp">precision</span>
+                    <span class="stamp">narrative</span>
+                    <span class="stamp">studio.x</span>
+                </div>
+            </section>
+
+            <section class="photo-col">
+                <div class="window-shadow-backdrop"></div>
+                <div class="profile-window">
+                    <div class="corner-metric">SYS // 04</div>
+                    <img src="Landing, Home, About/Main Photo 3.png" alt="Charie Diantha C. Tubil" class="inner-photo">
+                    <div class="info-sticker">Active // 2026 ✦</div>
+                    <div class="paper-tag">graduation photo</div>
+                </div>
+            </section>
+        </div>
+
+        <div class="details-grid">
+            <div class="grid-center-star">✦</div>
+
+            <section class="details-column">
+                <div>
+                    <div class="column-header-block">
+                        <h3>Work Experience</h3>
+                        <span class="header-num">[01]</span>
+                    </div>
+                    <div class="timeline-list">
+                        <div class="timeline-item">
+                            <span class="time-meta">MAY 2024 – OCT 2025</span>
+                            <div class="item-data-block">
+                                <span class="item-title">Multimedia Artist & Instrumentalist</span>
+                                <span class="item-subtitle">Church of Christ at Taguig – Central Signal, Taguig City</span>
+                                <div class="item-desc-tags">
+                                    <span>• Created/edited graphic and video assets for church live streams and special events.</span>
+                                    <span>• Served as live band instrumentalist contributing to worship production.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="time-meta">AUG 2023 – OCT 2025</span>
+                            <div class="item-data-block">
+                                <span class="item-title">Multimedia Artist</span>
+                                <span class="item-subtitle">Church of Christ at Rizal – Brgy. Rizal, Taguig City</span>
+                                <div class="item-desc-tags">
+                                    <span>• Engineered structured presentations supporting clear information display architecture.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="time-meta">AUG 2023 – MAY 2024</span>
+                            <div class="item-data-block">
+                                <span class="item-title">Graphic Designer</span>
+                                <span class="item-subtitle">Jose Rizal University - Rizalian eSports League</span>
+                                <div class="item-desc-tags">
+                                    <span>• Asset output production for organizational event broadcasts and live overlay graphics.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="column-header-block">
+                        <h3>Projects & Achievements</h3>
+                        <span class="header-num">[02]</span>
+                    </div>
+                    <div class="timeline-list">
+                        <div class="timeline-item">
+                            <span class="time-meta">2025 TRACK</span>
+                            <div class="item-data-block">
+                                <span class="item-title">Laro ng Bayan (Capstone Project)</span>
+                                <span class="item-subtitle">2D Artist & UI Designer</span>
+                                <div class="item-desc-tags">
+                                    <span>• Designed UI systems, character assets, and textures for a game bridging traditional culture.</span>
+                                    <span>• Awarded "Significant Award" & "Nostalgia Award".</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="column-header-block">
+                        <h3>Education</h3>
+                        <span class="header-num">[03]</span>
+                    </div>
+                    <div class="timeline-list">
+                        <div class="timeline-item">
+                            <span class="time-meta">AUG 2022 – JUN 2026</span>
+                            <div class="item-data-block">
+                                <span class="item-title">Bachelor of Science in Digital Animation Technology</span>
+                                <span class="item-subtitle">Jose Rizal University – Mandaluyong, Philippines</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="time-meta">SEP 2020 – JUN 2022</span>
+                            <div class="item-data-block">
+                                <span class="item-title">TVL - Caregiving NC II Strand</span>
+                                <span class="item-subtitle">Fort Bonifacio Highschool – Makati, Philippines</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="details-column">
+                <div class="sub-data-blocks">
+                    <div class="data-block-group">
+                        <div class="column-header-block">
+                            <h3>Hard Skills</h3>
+                            <span class="header-num">[04]</span>
+                        </div>
+                        <div class="tag-cloud">
+                            <span>Graphic Design</span>
+                            <span>UI/UX</span>
+                            <span>Logo & Character Design</span>
+                            <span>Composition & Layout</span>
+                            <span>Thematic Branding</span>
+                            <span>Color Theory</span>
+                            <span>Conceptualization & Illustration</span>
+                            <span>Video Editing</span>
+                            <span>Writing & Storytelling</span>
+                            <span>Visual Narrative Development</span>
+                        </div>
+                    </div>
+
+                    <div class="data-block-group">
+                        <div class="column-header-block">
+                            <h3>Soft Skills</h3>
+                            <span class="header-num">[05]</span>
+                        </div>
+                        <div class="tag-cloud">
+                            <span>Independent Work</span>
+                            <span>Eager to Learn</span>
+                            <span>Open to Criticism</span>
+                            <span>Punctual</span>
+                        </div>
+                    </div>
+
+                    <div class="data-block-group">
+                        <div class="column-header-block">
+                            <h3>Advanced Tools</h3>
+                            <span class="header-num">[06]</span>
+                        </div>
+                        <div class="tag-cloud">
+                            <span>Canva</span>
+                            <span>Clip Studio Paint</span>
+                            <span>Krita</span>
+                            <span>Adobe Photoshop</span>
+                            <span>Adobe Premiere Pro</span>
+                            <span>Capcut</span>
+                        </div>
+                    </div>
+
+                    <div class="data-block-group">
+                        <div class="column-header-block">
+                            <h3>Additional Proficiencies</h3>
+                            <span class="header-num">[07]</span>
+                        </div>
+                        <div class="tag-cloud">
+                            <span>Blender</span>
+                            <span>Adobe After Effects</span>
+                            <span>Figma</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="footer-tags">
+            <div class="footer-left-group">
+                <span>Taguig City, Metro Manila, Philippines &nbsp;&nbsp;<span style="opacity: 0.4">2026</span></span>
+            </div>
+            <div class="footer-right-group">
+                <span>© 2026 Charie Diantha C. Tubil. All Rights Reserved</span>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

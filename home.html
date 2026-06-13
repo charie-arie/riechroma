@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rheiiv.x</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            background:#ffffff;
+            color:#111;
+            font-family:'Inter',sans-serif;
+            overflow-x:hidden;
+            position:relative;
+        }
+
+        a{
+            text-decoration:none;
+            color:inherit;
+        }
+
+        .page{
+            width:min(94%,1440px);
+            margin:0 auto;
+            position:relative;
+            z-index:1;
+        }
+
+        header{
+            width:100%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:1.4rem 0;
+            position:sticky;
+            top:0;
+            z-index:60;
+            backdrop-filter:blur(12px);
+            background:#ffffff;
+        }
+
+        .logo{
+            font-size:.82rem;
+            letter-spacing:.34rem;
+            text-transform:uppercase;
+            font-weight:500;
+        }
+
+        .nav-links{
+            display:flex;
+            align-items:center;
+            gap:.8rem;
+            flex-wrap:wrap;
+        }
+
+        .nav-links a{
+            font-size:.72rem;
+            letter-spacing:.18rem;
+            text-transform:uppercase;
+            padding:.65rem .9rem;
+            border:1px solid rgba(0,0,0,.14);
+            border-radius:999px;
+            background:rgba(255,255,255,.35);
+        }
+
+        .nav-links a:hover{
+            background:#111;
+            color:#fff;
+        }
+
+        .hero{
+            min-height:84vh;
+            display:grid;
+            place-items:center;
+            position:relative;
+            padding:1.4rem 0 2rem;
+        }
+
+        .hero-inner{
+            width:100%;
+            display:grid;
+            grid-template-columns:1.15fr .85fr;
+            gap:1.4rem;
+            align-items:stretch;
+        }
+
+        .left{
+            position:relative;
+            min-height:760px;
+            border-radius:28px;
+            padding:1.2rem;
+            background:url("Landing, Home, About/Main Photo 2.png") center/cover no-repeat;
+            border:1px solid rgba(0,0,0,.08);
+            overflow:hidden;
+            box-shadow:0 16px 40px rgba(0,0,0,.05);
+        }
+
+        .brand{
+            position:absolute;
+            left:50%;
+            top:12%;
+            transform:translateX(-50%);
+            font-family:'Cormorant Garamond',serif;
+            font-size:clamp(4rem,10vw,9rem);
+            font-weight:400;
+            line-height:.86;
+            letter-spacing:-.05rem;
+            text-transform:lowercase;
+            text-align:center;
+            z-index:2;
+        }
+
+        .right{
+            min-height:760px;
+            display:grid;
+            gap:1rem;
+            align-content:space-between;
+        }
+
+        .panel{
+            border-radius:28px;
+            padding:1.2rem;
+            background:rgba(255,255,255,.32);
+            border:1px solid rgba(0,0,0,.08);
+            box-shadow:0 16px 34px rgba(0,0,0,.06);
+        }
+
+        .panel.top{
+            min-height:220px;
+            display:flex;
+            flex-direction:column;
+            justify-content:space-between;
+        }
+
+        .eyebrow{
+            font-size:.72rem;
+            letter-spacing:.22rem;
+            text-transform:uppercase;
+            opacity:.62;
+        }
+
+        .panel.top .big{
+            font-family:'Cormorant Garamond',serif;
+            font-size:clamp(2.6rem,4.5vw,4.4rem);
+            font-weight:500;
+            line-height:.9;
+            text-transform:lowercase;
+        }
+
+        .panel.top .small{
+            font-size:.82rem;
+            max-width:260px;
+            opacity:.72;
+            line-height:1.8;
+        }
+
+        .panel.mid{
+            min-height:320px;
+            position:relative;
+            overflow:hidden;
+            border:1px solid rgba(0,0,0,.1);
+            padding:0;
+        }
+
+        .panel.mid::before{
+            content:"";
+            position:absolute;
+            inset:0;
+            background:
+                    radial-gradient(circle at 70% 35%, rgba(255,255,255,.42), transparent 18%),
+                    radial-gradient(circle at 30% 60%, rgba(17,17,17,.12), transparent 25%),
+                    linear-gradient(135deg, rgba(255,255,255,.36), rgba(17,17,17,.06));
+            z-index:0;
+        }
+
+        .panel.mid .media-label{
+            position:absolute;
+            right:1rem;
+            top:1rem;
+            font-size:.72rem;
+            letter-spacing:.18rem;
+            text-transform:uppercase;
+            background:rgba(255,255,255,.58);
+            padding:.55rem .8rem;
+            border-radius:999px;
+            z-index:1;
+        }
+
+        .panel.bottom{
+            display:grid;
+            grid-template-columns:1fr auto;
+            gap:1rem;
+            align-items:stretch;
+            min-height:170px;
+            position:relative;
+        }
+
+        .top-right-subheading{
+            position:absolute;
+            top:1.2rem;
+            right:1.2rem;
+            font-size:.82rem;
+            letter-spacing:.14rem;
+            text-transform:uppercase;
+            opacity:.68;
+            max-width:220px;
+            text-align:right;
+            line-height:1.5;
+        }
+
+        .contact-block{
+            display:flex;
+            flex-direction:column;
+            justify-content:space-between;
+            min-height:100%;
+            width:100%;
+            padding-top:.35rem;
+        }
+
+        .contact-heading{
+            font-family:'Cormorant Garamond',serif;
+            font-size:clamp(3rem,4.8vw,4.6rem);
+            font-weight:500;
+            line-height:.72;
+            letter-spacing:-.03rem;
+            text-transform:lowercase;
+            opacity:.95;
+            white-space:pre-line;
+        }
+
+        .enter-btn{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            align-self:flex-end;
+            margin-top:auto;
+            padding:1rem 1.35rem;
+            border-radius:999px;
+            background:#111;
+            color:#fff;
+            border:1px solid #111;
+            letter-spacing:.18rem;
+            text-transform:uppercase;
+            font-size:.75rem;
+            white-space:nowrap;
+        }
+
+        .enter-btn:hover{
+            background:transparent;
+            color:#111;
+        }
+
+        .footer-tags{
+            display:flex;
+            justify-content:space-between;
+            gap:1rem;
+            padding:1.8rem 0 2.2rem;
+            font-size:.74rem;
+            letter-spacing:.16rem;
+            text-transform:uppercase;
+            opacity:.62;
+        }
+
+        .slider{
+            position:relative;
+            width:100%;
+            height:320px;
+        }
+
+        .slide{
+            position:absolute;
+            inset:0;
+            opacity:0;
+        }
+
+        .slide.active{
+            opacity:1;
+        }
+
+        .slide img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            display:block;
+        }
+
+        .dots{
+            position:absolute;
+            left:50%;
+            bottom:18px;
+            transform:translateX(-50%);
+            display:flex;
+            gap:.6rem;
+            z-index:10;
+        }
+
+        .dot{
+            width:8px;
+            height:8px;
+            border-radius:50%;
+            background:rgba(255,255,255,.45);
+        }
+
+        .dot.active{
+            background:#fff;
+            transform:scale(1.4);
+        }
+
+        @media (min-width: 900px){
+            .panel.mid{
+                flex-basis:32%;
+                max-width:none;
+            }
+        }
+
+        @media (max-width: 1100px){
+            .hero-inner{
+                grid-template-columns:1fr;
+            }
+
+            .left,
+            .right{
+                min-height:auto;
+            }
+
+            .left{
+                min-height:760px;
+            }
+        }
+
+        @media (max-width: 720px){
+            header{
+                padding:1rem 0;
+            }
+
+            .left{
+                min-height:860px;
+            }
+
+            .brand{
+                top:50%;
+            }
+
+            .panel.bottom{
+                grid-template-columns:1fr auto;
+            }
+
+            .top-right-subheading{
+                top:1rem;
+                right:1rem;
+                max-width:180px;
+                font-size:.74rem;
+            }
+
+            .footer-tags{
+                flex-direction:column;
+                align-items:center;
+                text-align:center;
+            }
+
+            .slider{
+                position:relative;
+                width:100%;
+                height:320px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <header>
+        <a href="index.html" class="logo">rheiiv.x</a>
+        <nav class="nav-links">
+            <a href="home.html">home</a>
+            <a href="about.html">about</a>
+            <a href="works.html">works</a>
+            <a href="contact.html">contact</a>
+        </nav>
+    </header>
+
+    <main class="hero" id="home">
+        <section class="hero-inner">
+            <div class="left">
+                <div class="brand">Charie Diantha</div>
+            </div>
+
+            <div class="right">
+                <section class="panel top" id="about">
+                    <div class="eyebrow">About Me</div>
+                    <div class="big">Visual<br>Philosophy</div>
+                    <div class="small">Creating visuals through design, motion, and digital craft. Inspired by monochrome aesthetics and quiet storytelling, I focus on work that feels intentional, timeless, and made to leave a lasting impression.</div>
+                </section>
+
+                <section class="panel mid" id="works">
+                    <div class="slider">
+                        <div class="slide active">
+                            <img src="Landing, Home, About/My Logo Sample.png" alt="My Logo Sample.png">
+                        </div>
+
+                        <div class="slide">
+                            <img src="Landing, Home, About/Jordan Model Sample.png" alt="Jordan Model Sample.png">
+                        </div>
+
+                        <div class="slide">
+                            <img src="Landing, Home, About/Tea Day Sample.png" alt="Tea Day Sample.png">
+                        </div>
+
+                        <div class="slide">
+                            <img src="Landing, Home, About/Tofu Venture Sample.png" alt="Tofu Venture Sample.png">
+                        </div>
+
+                        <div class="dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="panel bottom">
+                    <div class="top-right-subheading">Let’s push the boundaries together.</div>
+                    <div class="contact-block">
+                        <div class="contact-heading">let’s build<br>together</div>
+                        <a href="contact.html" class="enter-btn">reach out</a>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <div class="footer-tags">
+            <span>multimedia artist</span>
+            <span>based in manila, ph</span>
+        </div>
+    </main>
+</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    let currentSlide = 0;
+
+    function nextSlide(){
+        slides[currentSlide].classList.remove('active');
+        dots[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+    }
+
+    setInterval(nextSlide, 4000);
+</script>
+</body>
+</html>
