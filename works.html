@@ -913,17 +913,17 @@
         if (e.target === imageOverlay) imageOverlay.classList.remove('active');
     });
 
-    const videos = {
-        'Nintendo Product Ad.mp4': 'works page videos/Nintendo Product Ad.mp4',
-        'Nike Air Jordan.mp4': 'works page videos/Nike Air Jordan.mp4',
-        'Run Baby Run.mp4': 'works page videos/Run Baby Run.mp4',
-        'FSAAW Horror Trailer.mp4': 'works page videos/FSAAW Horror Trailer.mp4'
-    };
-
     document.querySelectorAll('.video-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const source = card.querySelector('source').getAttribute('src');
-            videoOverlayInner.innerHTML = `<video controls autoplay playsinline><source src="${source}" type="video/mp4"></video>`;
+        card.addEventListener('click', (e) => {
+            const video = e.currentTarget.querySelector('video');
+            const source = video?.currentSrc || video?.querySelector('source')?.src;
+            if (!source) return;
+
+            videoOverlayInner.innerHTML = `
+                <video controls autoplay playsinline>
+                    <source src="${source}" type="video/mp4">
+                </video>
+            `;
             videoOverlay.classList.add('active');
         });
     });
